@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload & Preview PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            width: 60%;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .preview-container {
+            margin-top: 20px;
+        }
+        .pdf-preview {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Upload & Preview PDF</h2>
+
+    <form id="uploadForm" action="/" method="POST" enctype="multipart/form-data">
+        <label>Select PDF File:</label>
+        <input type="file" id="pdfInput" name="pdf" accept="application/pdf" required onchange="previewPDF()"><br><br>
+
+        <iframe id="pdfPreview" class="pdf-preview"></iframe> <!-- PDF Preview Frame -->
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function previewPDF() {
+            const pdfInput = document.getElementById("pdfInput");
+            const pdfPreview = document.getElementById("pdfPreview");
+
+            if (pdfInput.files.length > 0) {
+                const file = pdfInput.files[0];
+                const objectURL = URL.createObjectURL(file);
+
+                pdfPreview.src = objectURL;
+                pdfPreview.style.display = "block"; // Show the preview
+            }
+        }
+    </script>
+
+</body>
+</html>
